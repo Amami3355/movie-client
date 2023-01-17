@@ -1,12 +1,13 @@
 import React from "react";
 import NavBar from "../components/NavBar";
-
-function Contact(){
-    return(
+function Contact() {
+    return (
         <div>
-            <NavBar/>
+            <NavBar />
             <h1>This is the contact page</h1>
+            
         </div>
+
     )
 }
 

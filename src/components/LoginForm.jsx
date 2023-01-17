@@ -11,7 +11,7 @@ const LoginForm = () => {
   };
 
   return (
-    <form action="/signin" method="post">
+    <form className='login-form' action="/signin" method="post">
       <div className="form-group">
         <label for="email">Email address</label>
         <input type="email" id="email" name="email" placeholder="Enter email" required />

@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -15,17 +16,21 @@ function NavBar(){
                         <Nav.Link href="#">Home</Nav.Link>
                         <Nav.Link href="#">Link</Nav.Link>
                     </Nav>
-                    <NavDropdown title="Dropdown" id="basic-nav-dropdown" className="justify-content-end">
+                    <NavDropdown title="Categories" id="basic-nav-dropdown" className="justify-content-center">
                         <NavDropdown.Item href="#">Action</NavDropdown.Item>
                         <NavDropdown.Item href="#">
-                            Another action
+                            Science Fiction
                         </NavDropdown.Item>
-                        <NavDropdown.Item href="#">Something</NavDropdown.Item>
+                        <NavDropdown.Item href="#">Drama</NavDropdown.Item>
                         <NavDropdown.Divider />
                         <NavDropdown.Item href="#">
-                            Separated link
+                            Comédie
                         </NavDropdown.Item>
                     </NavDropdown>
+                    <Nav>
+                        <NavLink href="#" className='justify-content-end'>Connection</NavLink>
+                    </Nav>
+                    
                 </Navbar.Collapse>
             </Container>
         </Navbar>
