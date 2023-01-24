@@ -3,14 +3,14 @@ import NavBar from "../components/NavBar";
 import LoginForm from "../components/LoginForm";
 
 
-function Login(){
+function Signin() {
     return (
         <div>
-            <NavBar/>
+            <NavBar />
             <h1>This is the home page</h1>
-            <LoginForm/>
+            <LoginForm />
         </div>
     );
 }
 
-export default Login;
+export default Signin;
