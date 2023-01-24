@@ -17,11 +17,11 @@ function MovieCard(props) {
   return (
     <div>
       <button className='btn' href='#' onClick={() => handleClick(props.movie.id)}>
-        <Card style={{ width: '12rem', height: '18rem' }}  >
-          <Card.Img height={230} variant="top" src={baseUrl + size + props.movie.poster_path}
+        <Card height={250} >
+          <Card.Img height={200} variant="top" src={baseUrl + size + props.movie.poster_path}
           />
           <Card.Body>
-            <Card.Title style={{ fontSize: 12 }}>{props.movie.title}</Card.Title>
+            <Card.Text height={20} style={{ fontSize: 7 }}>{props.movie.title}</Card.Text>
             {/* <Card.Text>
           {(props.movie.overview.split(" ").length > 20) ? 
           props.movie.overview.split(" ").splice(0, 20).join(" ") + " ..."

@@ -18,7 +18,7 @@ export async function fetchTrendingMovies() {
 }
 
 export async function fetchFrenshMovies() {
-  const url = "https://api.themoviedb.org/3/movie/popular?api_key=41f24e687319483950191eafd27835f1&language=fr&with_original_language=fr";
+  const url = "https://api.themoviedb.org/3/movie/popular?api_key=41f24e687319483950191eafd27835f1&language=fr&with_original_language=fr&adulte=false";
   try {
     const response = await fetch(url)
     const data = await response.json();
@@ -49,7 +49,7 @@ export async function getAdventureMovies() {
   return results;
 }
 
-export async function getPropositions(keyword){
+export async function getPropositions(keyword) {
   const url = "https://api.themoviedb.org/3/search/movie?api_key=41f24e687319483950191eafd27835f1&query=" + keyword + "&language=fr-FR";
   const results = await fetch(url)
     .then(response => response.json())
@@ -59,7 +59,7 @@ export async function getPropositions(keyword){
   return results;
 }
 
-export async function getMovieById(id){
+export async function getMovieById(id) {
   const url = "https://api.themoviedb.org/3/movie/" + id + "?api_key=41f24e687319483950191eafd27835f1";
   const results = await fetch(url)
     .then(response => response.json())
