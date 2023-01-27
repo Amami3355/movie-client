@@ -9,10 +9,12 @@ import { fetchTrendingMovies, getActionMovies, fetchFrenshMovies, getAdventureMo
 function MoviesCarousel(props) {
 
     const breakPoints = [
-        { width: 1, itemsToShow: 1 },
-        { width: 550, itemsToShow: 2 },
-        { width: 768, itemsToShow: 5 },
-        { width: 1200, itemsToShow: 6 },
+        // { width: 1, itemsToShow: 1 },
+        { width: 200, itemsToShow: 1 },
+        { width: 550, itemsToShow: 3 },
+        { width: 768, itemsToShow: 6 },
+        { width: 992, itemsToShow: 8 },
+        { width: 1200, itemsToShow: 10 },
     ];
 
     const [movies, setMovies] = useState([]);

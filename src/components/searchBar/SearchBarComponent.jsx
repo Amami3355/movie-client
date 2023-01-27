@@ -26,7 +26,7 @@ function SearchBarComponent() {
         setKeyword(e.target.value);
     }
 
-    function searchMovie(title){
+    function searchMovie(title) {
         setPropositions([]);
         alert(title);
     }
@@ -42,8 +42,8 @@ function SearchBarComponent() {
     return (
 
 
-        <div style={{ display: 'flex', position: 'absolute', left: 30, width: '100%', zIndex: 10, alignItems: 'center', justifyContent: 'center' }}>
-            <div style={{ position: 'relative', width: '100%' }}>
+        <div style={{ display: 'flex', position: 'absolute', left: 30, top: 50, width: '100%', zIndex: 10, alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '100%' }}>
                 <input
                     type="text"
                     placeholder='Search'
@@ -70,7 +70,7 @@ function SearchBarComponent() {
                                     <Card.Text onClick={() =>
                                         searchMovie(movie.title)}>{movie.title}</Card.Text>
                                 </Card>
-                                
+
                             </li>
                         ))}
                     </ul>

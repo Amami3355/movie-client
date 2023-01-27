@@ -1,12 +1,16 @@
 // import React, { useState } from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './formStyle.css';
+import axios from 'axios';
+
+
 
 const LoginForm = () => {
   const [username, setusername] = useState('');
   const [password, setPassword] = useState('');
   const [alert, setAlert] = useState('');
-
+  const navigate = useNavigate();
 
 
   function handleUserNameChange(e) {
@@ -17,44 +21,36 @@ const LoginForm = () => {
     setPassword(e.target.value);
   }
 
-  function connectToServer() {
-    fetch('http://localhost:8086/api/test/user')
-      .then(response => { console.log(response) })
-      .catch(error => { console.log("error") })
-  }
+  // function connectToServer() {
+  //   fetch('http://localhost:8086/api/test/user')
+  //     .then(response => { console.log(response) })
+  //     .catch(error => { console.log("error") })
+  // }
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("kkkk")
-    // Perform authentication logic here
-    fetch('http://localhost:8086/api/auth/signin', {
-      method: 'POST',
-      body: JSON.stringify({ "username": username, "password": password }),
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      credentials: "include"
+
+
+
+
+    axios.post('/api/auth/signin', {
+      username: username, password: password
+    }, {
+      withCredentials: true
+    }).then(function (response) {
+      return response;
+    }).then(data => {
+      console.log(data);
+      localStorage.setItem('cookie', data.data.cookie);
+      console.log(data.data.cookie)
+      navigate('/');
+
     })
-      .then(response => {
-        if (response.ok) {
-          // connectToServer();
-          console.log(response.headers)
-          const cookies = response.headers.get("Set-Cookie");
-          console.log(cookies);
-          setAlert('success')
-        } else {
-          setAlert('failed')
-        }
-        return response.json()
+      .catch(function (error) {
+        console.log(error);
+      });
 
-      })
-      .then(data => {
-        console.log(data)
-
-      })
-      .catch(error => { console.error(error) });
-
-  };
+  }
 
   return (
     <>
@@ -77,6 +73,8 @@ const LoginForm = () => {
         <input type="submit" onClick={handleSubmit} value="Sign In" />
         <a href="/signup" className="sign-in-link">Create an account</a>
       </form>
+
+
       {alert === 'success' &&
         <div className="login-form alert alert-success mt-3" role="alert">
           A simple success alert—check it out!
@@ -87,6 +85,7 @@ const LoginForm = () => {
           A simple success alert—check it out!
         </div>
       }
+
     </>
   );
 }

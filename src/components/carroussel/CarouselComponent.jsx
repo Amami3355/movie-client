@@ -67,7 +67,9 @@ function CarouselComponent(props) {
 
     return (
 
-        <div style={{ marginBottom: 40 }}>
+        <div style={{
+            marginBottom: 40, width: '100%'
+        }}>
             {showPosters &&
                 <Carousel activeIndex={index} onSelect={changeIndex}
                     style={{ width: '100%', height: '60%', margin: 'auto' }}
@@ -84,7 +86,7 @@ function CarouselComponent(props) {
 
                             <Carousel.Caption>
                                 <h3>{movie.title}</h3>
-                               
+
                                 <button
                                     className='btn btn-primary'
                                     onClick={() => { playTrailer(movie) }}>
