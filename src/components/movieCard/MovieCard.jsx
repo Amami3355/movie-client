@@ -20,17 +20,10 @@ function MovieCard(props) {
         <Card height={250} >
           <Card.Img height={200} variant="top" src={baseUrl + size + props.movie.poster_path}
           />
-          <Card.Body>
+          {/* <Card.Body>
             <Card.Text height={20} style={{ fontSize: 7 }}>{props.movie.title}</Card.Text>
-            {/* <Card.Text>
-          {(props.movie.overview.split(" ").length > 20) ? 
-          props.movie.overview.split(" ").splice(0, 20).join(" ") + " ..."
-          : props.movie.overview + " ..."}
-        </Card.Text> */}
-            {/* <Button variant="primary" onClick={() => handleClick(props.movie.id)}>
-              Go somewhere
-            </Button> */}
-          </Card.Body>
+            
+          </Card.Body> */}
         </Card>
       </button>
     </div>

@@ -2,13 +2,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './formStyle.css';
-import axios from 'axios';
-import Cookies from 'js-cookie';
+import AuthService from '../services/auth.service';
 
 
 
 
-const LoginForm = () => {
+
+const Login = () => {
   const [username, setusername] = useState('');
   const [password, setPassword] = useState('');
   // const [alert, setAlert] = useState('');
@@ -29,25 +29,12 @@ const LoginForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-
-
-
-    axios.post('/api/auth/signin', {
-      username: username, password: password
-    }, {
-      withCredentials: true
-    }).then(function (response) {
-      let cookieValue = Cookies.get('jwtCookie');
-      console.log(cookieValue);
-      return response;
-    }).then(data => {
-      console.log(data);
-      navigate('/');
-
-    })
-      .catch(function (error) {
-        console.log(error);
-      });
+    AuthService.login(username, password)
+      .then((data) => {
+        console.log(data)
+        navigate('/')
+      })
+      .then(() => { console.log(AuthService.getCurrentUser()) });
 
   }
 
@@ -89,4 +76,4 @@ const LoginForm = () => {
   );
 }
 
-export default LoginForm;
+export default Login;

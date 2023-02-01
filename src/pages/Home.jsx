@@ -19,13 +19,13 @@ function Home() {
             {/* <PresentationCarousel/> */}
             {/* <youtubeAutoplayWithCustomThumbs/> */}
             <CarouselComponent />
-            <h2>Tendences</h2>
-            <MoviesCarousel content="tending" />
-            <h2>Films Français</h2>
+            <h2 style={{ position: 'relative', left: 75 }}>Tendences</h2>
+            <MoviesCarousel content="trending" />
+            <h2 style={{ position: 'relative', left: 75 }}>Films Français</h2>
             <MoviesCarousel content="frensh" />
-            <h2>Action</h2>
+            <h2 style={{ position: 'relative', left: 75 }}>Action</h2>
             <MoviesCarousel content="action" />
-            <h2>Aventure</h2>
+            <h2 style={{ position: 'relative', left: 75 }}>Aventure</h2>
             <MoviesCarousel content="adventure" />
             <br /><br />
             <Footer />

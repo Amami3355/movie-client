@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Trailer from "../components/carroussel/Trailer";
-import NavBar from "../components/NavBar";
+import NavBar2 from "../components/NavBar2";
 import { getMovieById } from "../fetchFunctions";
 function Contact(props) {
 
@@ -29,8 +29,8 @@ function Contact(props) {
 
     return (
         <div>
-            <NavBar />
-            <h1 style={{textAlign: 'center', marginBottom: 20}}>{movie.title}</h1>
+            <NavBar2 />
+            <h1 style={{ textAlign: 'center', marginBottom: 20 }}>{movie.title}</h1>
             {!trailerPlaying &&
                 <div style={{ position: 'relative' }}>
 
@@ -46,11 +46,11 @@ function Contact(props) {
             }
 
             {trailerPlaying &&
-                <div style={{ position: 'relative', height: 400, width:'70%', margin: 'auto' }}>
+                <div style={{ position: 'relative', height: 400, width: '70%', margin: 'auto' }}>
 
                     <Trailer movieId={id} />
 
-                    
+
                 </div>
             }
         </div>

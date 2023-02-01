@@ -1,17 +1,18 @@
 import React from "react";
 // import NavBar from "../components/NavBar";
-import Login from "../components/Login";
 import NavBar2 from "../components/NavBar2";
+import Register from "../components/Register";
 
 
-function Signin() {
+function Signup() {
     return (
         <div>
             <NavBar2 />
-            <h1>Login</h1>
-            <Login />
+            <br /><br /><br /><br />
+            <h1>Signup</h1>
+            <Register />
         </div>
     );
 }
 
-export default Signin;
+export default Signup;
