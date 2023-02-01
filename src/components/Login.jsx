@@ -3,14 +3,18 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './formStyle.css';
 import axios from 'axios';
+import Cookies from 'js-cookie';
+
 
 
 
 const LoginForm = () => {
   const [username, setusername] = useState('');
   const [password, setPassword] = useState('');
-  const [alert, setAlert] = useState('');
+  // const [alert, setAlert] = useState('');
   const navigate = useNavigate();
+
+
 
 
   function handleUserNameChange(e) {
@@ -21,11 +25,6 @@ const LoginForm = () => {
     setPassword(e.target.value);
   }
 
-  // function connectToServer() {
-  //   fetch('http://localhost:8086/api/test/user')
-  //     .then(response => { console.log(response) })
-  //     .catch(error => { console.log("error") })
-  // }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -38,11 +37,11 @@ const LoginForm = () => {
     }, {
       withCredentials: true
     }).then(function (response) {
+      let cookieValue = Cookies.get('jwtCookie');
+      console.log(cookieValue);
       return response;
     }).then(data => {
       console.log(data);
-      localStorage.setItem('cookie', data.data.cookie);
-      console.log(data.data.cookie)
       navigate('/');
 
     })

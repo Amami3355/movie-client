@@ -1,6 +1,6 @@
 import React from "react";
 import NavBar from "../components/NavBar";
-import LoginForm from "../components/LoginForm";
+import Login from "../components/Login";
 
 
 function Signin() {
@@ -8,7 +8,7 @@ function Signin() {
         <div>
             <NavBar />
             <h1>This is the home page</h1>
-            <LoginForm />
+            <Login />
         </div>
     );
 }

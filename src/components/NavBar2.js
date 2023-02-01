@@ -14,17 +14,7 @@ function NavBar2() {
 
 
     useEffect(() => {
-        // console.log(jwt);
-        const cookies = document.cookie.split(';');
-        const keyValuePairs = cookies.map(cookie => cookie.split('='));
-        const cookie = keyValuePairs[0][0];
-        const cookieObject = keyValuePairs.reduce((acc, [key, value]) => {
-            acc[key.trim()] = value;
-            console.log(value)
-            return acc;
-        }, {});
-        console.log(cookie === '');
-        setIsConnected((cookie));
+        console.log(document.cookie);
     }, []);
 
     return (
