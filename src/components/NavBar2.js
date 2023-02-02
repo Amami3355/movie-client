@@ -97,18 +97,30 @@ function NavBar2() {
                                     <NavDropdown title="Options" style={{ relative: 'absolute', right: 10 }}>
 
                                         {(!isConnected) &&
-                                            <NavDropdown.Item href="signin">
-                                                Connection
-                                            </NavDropdown.Item>}
+                                            <div>
+                                                <NavDropdown.Item href="signin">
+                                                    Connection
+                                                </NavDropdown.Item>
+                                                <NavDropdown.Divider />
+                                                <NavDropdown.Item href="/signup">
+                                                    S'enregistrer
+                                                </NavDropdown.Item>
+                                            </div>
+                                        }
 
                                         {(isConnected) &&
-                                            <NavDropdown.Item href="signout">
-                                                Déconnexion
-                                            </NavDropdown.Item>}
-                                        <NavDropdown.Divider />
-                                        <NavDropdown.Item href="/signup">
-                                            S'enregistrer
-                                        </NavDropdown.Item>
+                                            <div>
+                                                <NavDropdown.Item href="profile">
+                                                    Profile
+                                                </NavDropdown.Item>
+                                                <NavDropdown.Divider />
+                                                <NavDropdown.Item href="signout">
+                                                    Déconnexion
+                                                </NavDropdown.Item>
+                                            </div>
+                                        }
+
+
                                     </NavDropdown>
                                 </Nav>
 

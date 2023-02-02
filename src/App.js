@@ -1,3 +1,4 @@
+import React from 'react';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
@@ -7,9 +8,10 @@ import Error from './pages/Error';
 import Signin from './pages/Signin';
 import MovieInfo from './pages/MovieInfo';
 import NavBar from './components/NavBar';
-// import { useState } from 'react';
 import Signout from './pages/Signout';
 import Signup from './pages/Signup';
+import Profile from './pages/Profile';
+import './components/comment/comment.css'
 
 function App() {
   // const [isconnected, setIsConnected] = useState(false);
@@ -21,6 +23,7 @@ function App() {
         <Route path='/signin' element={<Signin />}></Route>
         <Route path='/signout' element={<Signout />}></Route>
         <Route path='/signup' element={<Signup />}></Route>
+        <Route path='/profile' element={<Profile />}></Route>
         <Route path='/about' element={<About />}></Route>
         <Route path='/contact' element={<Contact />}></Route>
         <Route path='/error' element={<Error />}></Route>
