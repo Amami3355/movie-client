@@ -54,7 +54,7 @@ function Contact(props) {
                 <div class="container" >
                     <div style={inf_content}>
                         <div class="row">
-                            <div class="col-lg-4">
+                            <div class="col-lg-4" style={{ textAlign: 'center' }}>
                                 <img alt="" style={{ width: 300 }} src={baseUrl + size + movie.poster_path} data-original-title="Usuario" />
 
                             </div>

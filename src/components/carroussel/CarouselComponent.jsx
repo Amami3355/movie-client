@@ -68,11 +68,11 @@ function CarouselComponent(props) {
     return (
 
         <div style={{
-            marginBottom: 40, width: '100%'
+            marginBottom: 40, width: '100%', marginTop: 100
         }}>
             {showPosters &&
                 <Carousel activeIndex={index} onSelect={changeIndex}
-                    style={{ width: '100%', height: '60%', margin: 'auto' }}
+                    style={{ width: '90%', height: '60%', margin: 'auto' }}
                 >
 
 
@@ -99,7 +99,7 @@ function CarouselComponent(props) {
 
             }
             {showTrailer && <Carousel
-                style={{ width: '100%', height: '60%', margin: 'auto' }}
+                style={{ width: '90%', height: '60%', margin: 'auto' }}
                 prevIcon={
                     <span aria-hidden="true" className="carousel-control-prev-icon"
                         onClick={handlePrev} />

@@ -3,6 +3,7 @@ import NavBar2 from "../components/NavBar2";
 import CarouselComponent from "../components/carroussel/CarouselComponent"
 import MoviesCarousel from "../components/carroussel/MoviesCarousel"
 import Footer from "../components/footer/Footer";
+import Menu from "../components/menu/Menu";
 
 
 function Home() {
@@ -12,12 +13,10 @@ function Home() {
     return (
         <div style={{ minHeight: '100%', position: 'relative' }}>
 
-            <NavBar2 />
-            {/* <SearchBarComponent /> */}
+            <Menu />
+            {/* <NavBar2 /> */}
             <br />
-            {/* <CarouselComponent/> */}
-            {/* <PresentationCarousel/> */}
-            {/* <youtubeAutoplayWithCustomThumbs/> */}
+
             <CarouselComponent />
             <h2 style={{ position: 'relative', left: 75 }}>Tendences</h2>
             <MoviesCarousel content="trending" />

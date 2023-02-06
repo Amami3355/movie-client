@@ -10,13 +10,12 @@ function MovieCard(props) {
 
 
   function handleClick(id) {
-    alert('hello')
     navigate('/movie-info?id=' + id);
   }
 
   return (
     <div key={props.index}>
-      <button className='btn' href='#' onClick={() => handleClick(props.movie.id)}>
+      <button className='btn' onClick={() => handleClick(props.movie.id)}>
         <Card height={250} >
           <Card.Img height={200} variant="top" src={baseUrl + size + props.movie.poster_path}
           />

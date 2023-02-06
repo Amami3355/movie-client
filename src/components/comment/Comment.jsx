@@ -12,28 +12,22 @@ function Comment(props) {
                     <div className='row'>
                         <div className='col sm-8'>
                             <form className='form'>
-                                <div className='row'>
-                                    <div className='col'>
-                                        <h3 className="float-none">New Comment</h3>
-                                    </div>
-                                    <div className='col'>
-                                        <button type="submit" className="btn btn-primary float-end">Submit</button>
-                                    </div>
-                                </div>
+                                <h3 className="float-none pl-5">New Comment</h3>
                                 <div className='container-fluid'>
                                     <div className='row'>
                                         <div className="col-md-2 hidden-xs">
                                             <img style={{ maxWidth: 100 }} className="media-object" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" />
                                         </div>
-                                        <div className="col-md-10 form-group">
-                                            <textarea className="form-control" id="message" placeholder="Your message" required></textarea>
+                                        <div class="container col-md-10 form-group">
+                                            <textarea class="form-control" id="text" name="text" placeholder="Type in your message" rows="5"></textarea>
+                                            <h6 class="float-end" id="count_message"></h6>
+                                            <button class="btn btn-info float-end" type="submit">Post New Message</button>
                                         </div>
                                     </div>
                                 </div>
                             </form>
 
                             <h3>4 Comments</h3>
-
 
                             {/* <!-- COMMENT 2 - START --> */}
                             <div className="d-flex media">
