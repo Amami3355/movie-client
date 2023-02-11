@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './formStyle.css';
 import AuthService from '../services/auth.service';
-
+import { AxiosError } from 'axios';
+import ValidationService from '../services/ValidationService';
 
 
 
@@ -11,7 +12,6 @@ import AuthService from '../services/auth.service';
 const Login = () => {
   const [username, setusername] = useState('');
   const [password, setPassword] = useState('');
-  // const [alert, setAlert] = useState('');
   const navigate = useNavigate();
 
 
@@ -26,15 +26,45 @@ const Login = () => {
   }
 
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  function hideAlert(e) {
+    const alert = e.target.parentElement;
+    alert.classList.remove('show')
+    alert.classList.add('hide')
+  }
 
-    AuthService.login(username, password)
-      .then((data) => {
-        console.log(data)
-        navigate('/')
-      })
-      .then(() => { console.log(AuthService.getCurrentUser()) });
+  function showAlert(message) {
+    const alert = document.getElementById('alert');
+    const alertText = document.getElementById('alert-text')
+    alertText.textContent = message;
+    alert.classList.remove('hide')
+    alert.classList.add('show')
+  }
+
+
+
+  const handleSubmit = (event) => {
+
+    event.preventDefault();
+    const username = document.getElementById('username').value
+    const password = document.getElementById('password').value
+    if (ValidationService.validateUserName(username) && ValidationService.validatePassword(password)) {
+      AuthService.login(username, password)
+        .then((data) => {
+          if (data instanceof AxiosError) {
+            throw new Error('user name ou mot de passe incorrects')
+          } else {
+            console.log(data)
+            navigate('/')
+          }
+        })
+        .then(() => { console.log(AuthService.getCurrentUser()) })
+        .catch((error) => { showAlert(error) });
+    }
+
+    else {
+      showAlert("Renseignez tous les champs obligatoires ...")
+    }
+
 
   }
 
@@ -56,21 +86,22 @@ const Login = () => {
             onChange={handlePasswordChange}
             placeholder="Password" required />
         </div>
+
         <input type="submit" onClick={handleSubmit} value="Sign In" />
+
         <a href="/signup" className="sign-in-link">Create an account</a>
+
+        <div id='alert' class="alert alert-warning alert-dismissible fade show" role="alert">
+          <div id='alert-text'>
+            <strong>Erreur : </strong> User name ou bien mot de passe incorrects
+          </div>
+          <button onClick={hideAlert} type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+        </div>
       </form>
 
 
-      {alert === 'success' &&
-        <div className="login-form alert alert-success mt-3" role="alert">
-          A simple success alert—check it out!
-        </div>
-      }
-      {alert === 'failed' &&
-        <div className="login-form alert alert-danger mt-3" role="alert">
-          A simple success alert—check it out!
-        </div>
-      }
+
 
     </>
   );

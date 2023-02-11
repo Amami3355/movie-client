@@ -58,6 +58,7 @@
 }
 
 .Navbar-Link {
+    color: black;
     font-size: 24px;
     font-family: Overpass;
     font-weight: 700;
@@ -130,6 +131,27 @@
 @media(max-width: 991px) {
     .home-heading1 {
         text-align: center;
+    }
+
+    .home-burger-menu {
+        display: flex;
+        padding: var(--dl-space-space-halfunit);
+        margin-left: var(--dl-space-space-tripleunit);
+        border-radius: var(--dl-radius-radius-radius4);
+        background-color: var(--dl-color-gray-black);
+    }
+
+    .home-navbar {
+        width: 100%;
+
+    }
+
+    .home-icon {
+        fill: var(--dl-color-gray-white);
+    }
+
+    .home-links-container {
+        display: none;
     }
 }
 

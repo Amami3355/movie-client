@@ -1,5 +1,4 @@
 import React from "react";
-import NavBar2 from "../components/NavBar2";
 import CarouselComponent from "../components/carroussel/CarouselComponent"
 import MoviesCarousel from "../components/carroussel/MoviesCarousel"
 import Footer from "../components/footer/Footer";
@@ -14,9 +13,7 @@ function Home() {
         <div style={{ minHeight: '100%', position: 'relative' }}>
 
             <Menu />
-            {/* <NavBar2 /> */}
             <br />
-
             <CarouselComponent />
             <h2 style={{ position: 'relative', left: 75 }}>Tendences</h2>
             <MoviesCarousel content="trending" />

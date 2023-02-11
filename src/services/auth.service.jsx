@@ -11,30 +11,38 @@ const register = (username, email, password) => {
 }
 
 const login = (username, password) => {
-    if (localStorage.getItem('user')) {
-        localStorage.removeItem('user')
+    // Remove the current connected user
+    if (localStorage.getItem('Authorization')) {
+        localStorage.removeItem('Authorization')
     }
+
+    //Connect with the new User with username and password
     return axios.post(API_URL + '/signin', {
         username,
         password
     }).then(
         response => {
-            if (response.data.jwt) {
-                localStorage.setItem('user', JSON.stringify(response.data))
+            console.log(response)
+            if (response.data.jwtCookie) {
+                localStorage.setItem('Authorization', response.data.jwtCookie)
             }
             return response.data
         }
     )
-        .catch(error => console.log(error))
+        .catch(error => { console.log(error); return error })
 }
 
+
+
 const logout = () => {
-    localStorage.removeItem('user');
+    localStorage.removeItem('Authorization');
     return axios.post(API_URL + '/signout');
 }
 
+
+
 const getCurrentUser = () => {
-    return JSON.parse(localStorage.getItem('user'));
+    return localStorage.getItem('Authorization');
 }
 
 const AuthService = {

@@ -1,11 +1,14 @@
 .home-footer-container {
     width: 100%;
+    margin-top: auto;
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
     background-color: var(--dl-color-gray-white);
+
 }
+
 
 .home-footer {
     width: 80%;
@@ -18,6 +21,7 @@
     flex-direction: row;
     padding-bottom: var(--dl-space-space-tripleunit);
     justify-content: space-between;
+    margin-top: auto;
 }
 
 .home-social-links {

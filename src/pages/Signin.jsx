@@ -1,15 +1,17 @@
 import React from "react";
 // import NavBar from "../components/NavBar";
 import Login from "../components/Login";
-import NavBar2 from "../components/NavBar2";
-
+import Menu from "../components/menu/Menu";
+import Footer from '../components/footer/Footer'
 
 function Signin() {
     return (
         <div>
-            <NavBar2 />
+            <Menu />
+            <br /><br /><br /><br />
             <h1>Login</h1>
             <Login />
+            <Footer />
         </div>
     );
 }

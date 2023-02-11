@@ -27,7 +27,7 @@ function App() {
         <Route path='/about' element={<About />}></Route>
         <Route path='/contact' element={<Contact />}></Route>
         <Route path='/error' element={<Error />}></Route>
-        <Route path='/movie-info' element={<MovieInfo />}></Route>
+        <Route path='/movie-info/:movieId' element={<MovieInfo />}></Route>
       </Routes>
     </div>
   );

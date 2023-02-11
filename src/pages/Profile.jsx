@@ -1,4 +1,4 @@
-import NavBar2 from '../components/NavBar2';
+import Menu from '../components/menu/Menu';
 
 
 function Profile() {
@@ -17,7 +17,7 @@ function Profile() {
 
     return (
         <>
-            <NavBar2 />
+            <Menu />
             <div style={profileStyle}>
                 <div class="container bootstrap">
                     <h1 class="text-primary">Edit Profile</h1>
@@ -26,7 +26,7 @@ function Profile() {
                         {/* left column  */}
                         <div class="col-md-3">
                             <div class="text-center">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="avatar img-circle img-thumbnail" alt="avatar" />
+                                <img src={require("../images/unknown.png")} class="avatar img-circle img-thumbnail" alt="avatar" />
                                 <h6>Upload a different photo...</h6>
 
                                 <input type="file" class="form-control" />

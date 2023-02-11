@@ -1,29 +1,55 @@
 import { faPlayCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Trailer from "../components/carroussel/Trailer";
-import Comment from "../components/comment/Comment";
-import NavBar2 from "../components/NavBar2";
+// import Comment from "../components/comment/Comment";
+import InfoMovie from "../components/InfoMovie";
+import Menu from "../components/menu/Menu";
 import { getMovieById } from "../fetchFunctions";
-function Contact(props) {
+import AuthService from "../services/auth.service";
+import CommentService from "../services/CommentService";
+function MovieInfo(props) {
 
     const [trailerPlaying, setTrailerPlaying] = useState(false);
-    const [movie, SetMovie] = useState({});
+    const [movie, setMovie] = useState({});
+    const [value, setValue] = useState("");
+    const user = AuthService.getCurrentUser();
 
+    const { movieId } = useParams();
 
     const baseUrl = 'https://image.tmdb.org/t/p/'; // base URL for TMDb images
     const size = 'w500'; // size of the image
 
-    let location = useLocation();
-    let query = new URLSearchParams(location.search);
-    let id = query.get('id');
+
+    const [comments, setComments] = useState([])
+
+    async function handleSubmit(e) {
+        if (user) {
+            const text = document.getElementById('text').value
+
+            CommentService.createComment(movieId, text)
+                .then((response) => { setValue(text) });
+
+            document.getElementById('text').value = "";
+        } else {
+            alert("Connect to be able to comment")
+        }
+
+    }
+
+
 
 
 
     useEffect(() => {
-        getMovieById(id).then(movie => SetMovie(movie));
-    }, [id])
+        CommentService.getMovieComments(movieId)
+            .then(res => { setComments(res) })
+            .catch(error => setComments([]))
+
+
+        getMovieById(movieId).then(movie => setMovie(movie))
+    }, [movieId, value])
 
 
     function PlayTrailer() {
@@ -37,130 +63,15 @@ function Contact(props) {
         display: 'block'
     }
 
-    const inf_content = {
-        border: '1px solid #DDDDDD',
-        WebkitBorderRadius: 10,
-        borderRadius: 10,
-        boxShadow: '7px 7px 7px rgba(0, 0, 0, 0.3)'
 
-    }
 
     return (
         <>
-            <NavBar2 />
+            <Menu />
             <div style={InfoStyle}>
 
 
-                <div class="container" >
-                    <div style={inf_content}>
-                        <div class="row">
-                            <div class="col-lg-4" style={{ textAlign: 'center' }}>
-                                <img alt="" style={{ width: 300 }} src={baseUrl + size + movie.poster_path} data-original-title="Usuario" />
-
-                            </div>
-                            <div class="col-lg-6">
-                                <h1><strong>{movie.title}</strong></h1><br />
-                                <div class="table-responsive">
-                                    <table class="table table-user-information">
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <strong>
-                                                        <span class="text-primary"></span>
-                                                        Identificacion
-                                                    </strong>
-                                                </td>
-                                                <td class="text-primary">
-                                                    123456789
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <strong>
-                                                        <span class="text-primary"></span>
-                                                        Name
-                                                    </strong>
-                                                </td>
-                                                <td class="text-primary">
-                                                    Bootdey
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <strong>
-                                                        <span class="text-primary"></span>
-                                                        Lastname
-                                                    </strong>
-                                                </td>
-                                                <td class="text-primary">
-                                                    Bootstrap
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    <strong>
-                                                        <span class="text-primary"></span>
-                                                        Username
-                                                    </strong>
-                                                </td>
-                                                <td class="text-primary">
-                                                    bootnipets
-                                                </td>
-                                            </tr>
-
-
-                                            <tr>
-                                                <td>
-                                                    <strong>
-                                                        <span class="text-primary"></span>
-                                                        Role
-                                                    </strong>
-                                                </td>
-                                                <td class="text-primary">
-                                                    Admin
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <strong>
-                                                        <span class="text-primary"></span>
-                                                        Email
-                                                    </strong>
-                                                </td>
-                                                <td class="text-primary">
-                                                    noreply@email.com
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <strong>
-                                                        <span class="text-primary"></span>
-                                                        created
-                                                    </strong>
-                                                </td>
-                                                <td class="text-primary">
-                                                    20 jul 20014
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <strong>
-                                                        <span class="text-primary"></span>
-                                                        Modified
-                                                    </strong>
-                                                </td>
-                                                <td class="text-primary">
-                                                    20 jul 20014 20:00:00
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <InfoMovie movie={movie} />
 
                 <div className="container mt-5" >
                     {!trailerPlaying &&
@@ -180,14 +91,60 @@ function Contact(props) {
                     {trailerPlaying &&
                         <div style={{ position: 'relative', height: 400, width: '100%', margin: 'auto' }}>
 
-                            <Trailer movieId={id} />
+                            <Trailer movieId={movieId} />
 
 
                         </div>
                     }
                 </div>
                 <div className="container">
-                    <Comment />
+                    <section className="content-item" id="comments">
+                        <div className='container'>
+                            <div className='row'>
+                                <div className='col sm-8'>
+                                    <form className='form'>
+                                        <h3 className="float-none pl-5">New Comment</h3>
+                                        <div className='container-fluid'>
+                                            <div className='row'>
+                                                <div className="col-md-2 hidden-xs">
+                                                    <img style={{ maxWidth: 100 }} className="media-object" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" />
+                                                </div>
+                                                <div class="container col-md-10 form-group">
+                                                    <textarea class="form-control" id="text" name="text" placeholder="Type in your message" rows="5"></textarea>
+                                                    <h6 class="float-end" id="count_message"></h6>
+                                                    <button class="btn btn-info float-end" type="button"
+                                                        onClick={handleSubmit}>Post New Message</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                    <h3> Comments</h3>
+                                    {
+                                        comments.map(comment => (
+                                            <div className="d-flex media">
+                                                <a className="float-none" href="#"><img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" /></a>
+                                                <div className="flex-grow-1 ms-3">
+                                                    <h4 className="media-heading">John Doe</h4>
+                                                    <p>{comment.text}</p>
+                                                    <ul className="d-inline list-unstyled list-inline media-detail float-none">
+                                                        <li className='list-inline-item'>27/02/2014</li>
+                                                        <li className='list-inline-item'>13</li>
+                                                    </ul>
+                                                    <ul className="d-inline list-unstyled list-inline media-detail float-end">
+                                                        <li className='list-inline-item'><a href="">Like</a></li>
+                                                        <li className='list-inline-item'><a href="">Reply</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        ))
+                                    }
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
             </div>
         </>
@@ -195,4 +152,4 @@ function Contact(props) {
     )
 }
 
-export default Contact;
+export default MovieInfo;

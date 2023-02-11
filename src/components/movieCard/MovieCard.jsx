@@ -1,30 +1,29 @@
 // import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function MovieCard(props) {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const baseUrl = 'https://image.tmdb.org/t/p/'; // base URL for TMDb images
   const size = 'w500'; // size of the image
 
 
-  function handleClick(id) {
-    navigate('/movie-info?id=' + id);
-  }
+  // function handleClick(id) {
+  //   navigate('/movie-info?id=' + id);
+  // }
 
   return (
     <div key={props.index}>
-      <button className='btn' onClick={() => handleClick(props.movie.id)}>
+      {/* <button className='btn' onClick={() => handleClick(props.movie.id)}> */}
+      <Link to={'/movie-info/' + props.movie.id}>
         <Card height={250} >
           <Card.Img height={200} variant="top" src={baseUrl + size + props.movie.poster_path}
           />
-          {/* <Card.Body>
-            <Card.Text height={20} style={{ fontSize: 7 }}>{props.movie.title}</Card.Text>
-            
-          </Card.Body> */}
+
         </Card>
-      </button>
+      </Link>
+      {/* </button> */}
     </div>
   );
 }
