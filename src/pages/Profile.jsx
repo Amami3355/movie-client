@@ -1,7 +1,12 @@
+import { useState } from 'react';
+import { useEffect } from 'react';
 import Menu from '../components/menu/Menu';
-
+import AuthService from '../services/auth.service';
+import UserService from "../services/user.service";
 
 function Profile() {
+
+    const [user, setUser] = useState({})
 
     const profileStyle = {
         position: 'relative',
@@ -14,6 +19,12 @@ function Profile() {
         const alert = e.target.parentElement;
         alert.style.display = 'none'
     }
+
+    useEffect(() => {
+        const jwt = AuthService.getCurrentUser();
+        UserService.getUserByjwt(jwt)
+            .then(response => setUser(response.data))
+    }, [])
 
     return (
         <>
@@ -46,28 +57,30 @@ function Profile() {
                                 <div class="form-group">
                                     <label class="col-lg-3 control-label">First name:</label>
                                     <div class="col-lg-8">
-                                        <input class="form-control" type="text" value="dey-dey" />
+                                        <input class="form-control" type="text" name="first_name" value={user.firstName} />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-lg-3 control-label">Last name:</label>
                                     <div class="col-lg-8">
-                                        <input class="form-control" type="text" value="bootdey" />
+                                        <input class="form-control" type="text" name="last_name" value={user.lastName} />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-lg-3 control-label">User name:</label>
                                     <div class="col-lg-8">
-                                        <input class="form-control" type="text" value="" />
+                                        <input class="form-control" type="text" name="user_name" value={user.username} />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-lg-3 control-label">Email:</label>
                                     <div class="col-lg-8">
-                                        <input class="form-control" type="text" value="janesemail@gmail.com" />
+                                        <input class="form-control" type="text" name="email" value={user.email} />
                                     </div>
                                 </div>
-
+                                <div class="col-lg-8">
+                                    <input type="submit" className="btn" value="Update" />
+                                </div>
                             </form>
                         </div>
                     </div>

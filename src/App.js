@@ -11,7 +11,9 @@ import NavBar from './components/NavBar';
 import Signout from './pages/Signout';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
+import WatchList from './pages/WatchList';
 import './components/comment/comment.css'
+import MovieList from './pages/MovieList';
 
 function App() {
   // const [isconnected, setIsConnected] = useState(false);
@@ -28,6 +30,8 @@ function App() {
         <Route path='/contact' element={<Contact />}></Route>
         <Route path='/error' element={<Error />}></Route>
         <Route path='/movie-info/:movieId' element={<MovieInfo />}></Route>
+        <Route path='/movie-list/:genre' element={<MovieList />}></Route>
+        <Route path='/watch-list' element={<WatchList />}></Route>
       </Routes>
     </div>
   );

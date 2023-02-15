@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import Genres from '../dropdown/Genres';
 import './menu.css'
 import AuthService from '../../services/auth.service'
+import SearchBar from '../searchBar/SearchBar';
+import { Menu as Menu2, MenuItem } from '@szhsin/react-menu';
 
 function Menu() {
     const [isConnected, setIsConnected] = useState(false)
@@ -34,25 +36,32 @@ function Menu() {
         <div data-role="Header" className="home-navbar-container">
             <div className="home-navbar">
                 <span className="Card-Heading home-heading">Logo</span>
-
+                <SearchBar />
                 {!isConnected && (
                     <div className="home-links-container">
                         <Link className="btn home-link Navbar-Link" to={'/'}>Acceil</Link>
                         <Genres />
-                        <Link className="btn home-link Navbar-Link">Nouveautés</Link>
+                        <Link className="btn home-link Navbar-Link" to={'/movie-list/trending'}>Nouveautés</Link>
                         <Link className="btn home-link Navbar-Link" to={'/signin'}>Connexion</Link>
                         <Link className="btn home-link Navbar-Link" to={'/signup'}>S'inscrire</Link>
                     </div>
                 )}
                 {isConnected && (
                     <div className="home-links-container">
-                        <div className="home-links-container">
-                            <Link className="btn home-link Navbar-Link" to={'/'}>Acceil</Link>
-                            <Genres />
-                            <Link className="btn home-link Navbar-Link">Nouveautés</Link>
-                            <Link className="btn home-link Navbar-Link" to={'/signout'}>Déconnexion</Link>
-                            <Link className="btn home-link Navbar-Link" to={'/profile'}>Profile</Link>
-                        </div>
+
+                        <Link className="btn home-link Navbar-Link" to={'/'}>Acceil</Link>
+                        <Genres />
+                        <Link className="btn home-link Navbar-Link" to={'/movie-list/trending'}>Nouveautés</Link>
+                        <Menu2 menuButton={
+                            <div className="btn home-link Navbar-Link">
+                                <img src={require('../../images/profile-svgrepo-com.svg')} />
+                            </div>
+                        } transition>
+                            <MenuItem><Link className="btn home-link Navbar-Link" to={'/watch-list'}>Watch list</Link></MenuItem>
+                            <MenuItem><Link className="btn home-link Navbar-Link" to={'/profile'}>Profile</Link></MenuItem>
+                            <MenuItem><Link className="btn home-link Navbar-Link" to={'/signout'}>Déconnexion</Link></MenuItem>
+                        </Menu2>
+
                     </div>
                 )}
 
@@ -78,18 +87,20 @@ function Menu() {
                         <div className="home-links-container1">
                             <Link className="btn home-link Navbar-Link" to={'/'}>Acceil</Link>
                             <Genres />
-                            <Link className="btn home-link Navbar-Link">Nouveautés</Link>
+                            <Link className="btn home-link Navbar-Link" to={'/movie-list/trending'}>Nouveautés</Link>
                             <Link className="btn home-link Navbar-Link" to={'/signin'}>Connexion</Link>
                             <Link className="btn home-link Navbar-Link" to={'/signup'}>S'inscrire</Link>
                         </div>
                     )}
                     {isConnected && (
                         <div className="home-links-container1">
-                            <Link className="btn home-link Navbar-Link" to={'/'}>Acceil</Link>
+                            <Link className="btn home-link Navbar-Link me-1 mb-1" to={'/'}>Acceil</Link>
                             <Genres />
-                            <Link className="btn home-link Navbar-Link">Nouveautés</Link>
+                            <Link className="btn home-link Navbar-Link" to={'/movie-list/trending'}>Nouveautés</Link>
+                            <Link className="btn home-link Navbar-Link" to={'/watch-list'}>Watch list</Link>
+                            <Link className="btn home-link Navbar-Link" to={'/profile'}>Profil</Link>
                             <Link className="btn home-link Navbar-Link" to={'/signout'}>Déconnextion</Link>
-                            <Link className="btn home-link Navbar-Link" to={'/signup'}>Profil</Link>
+
                         </div>
                     )}
                 </div>

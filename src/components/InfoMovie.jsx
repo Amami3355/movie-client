@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import { getMovieById } from "../fetchFunctions";
 
 
 function InfoMovie(props) {
@@ -7,7 +8,7 @@ function InfoMovie(props) {
     const baseUrl = 'https://image.tmdb.org/t/p/'; // base URL for TMDb images
     const size = 'w500'; // size of the image
 
-    // const [movie, setMovie] = useState({})
+    const [movie, setMovie] = useState({})
 
     const inf_content = {
         border: '1px solid #DDDDDD',
@@ -16,22 +17,22 @@ function InfoMovie(props) {
         boxShadow: '7px 7px 7px rgba(0, 0, 0, 0.3)'
     }
 
-    // useEffect(
-    //     () => {
-    //         setMovie(props.movie)
-    //     }, []
-    // )
+    useEffect(
+        () => {
+            getMovieById(props.movieId).then(movie => { console.log(movie.genres); setMovie(movie) })
+        }, [props.movieId]
+    )
 
     return (
         <div class="container" >
             <div style={inf_content}>
                 <div class="row">
                     <div class="col-lg-4" style={{ textAlign: 'center' }}>
-                        <img alt="" style={{ width: 300 }} src={baseUrl + size + props.movie.poster_path} data-original-title="Usuario" />
+                        <img alt="" style={{ width: 300 }} src={baseUrl + size + movie.poster_path} data-original-title="Usuario" />
 
                     </div>
                     <div class="col-lg-6">
-                        <h1><strong>{props.movie.title}</strong></h1><br />
+                        <h1><strong>{movie.title}</strong></h1><br />
                         <div class="table-responsive">
                             <table class="table table-user-information">
                                 <tbody>
@@ -43,7 +44,7 @@ function InfoMovie(props) {
                                             </strong>
                                         </td>
                                         <td class="text-primary">
-                                            {props.movie.overview}
+                                            {movie.overview}
                                         </td>
                                     </tr>
                                     <tr>
@@ -54,7 +55,7 @@ function InfoMovie(props) {
                                             </strong>
                                         </td>
                                         <td class="text-primary">
-                                            {props.movie.original_language}
+                                            {movie.original_language}
                                         </td>
                                     </tr>
                                     <tr>
@@ -66,7 +67,7 @@ function InfoMovie(props) {
                                         </td>
                                         <td class="text-primary">
                                             {
-                                                // props.movie.genres[0].name
+                                                // movie.genres
                                             }
                                         </td>
                                     </tr>
@@ -81,7 +82,7 @@ function InfoMovie(props) {
                                             {/* {
                                                 movie.production_companies.map(company => company.name).join(', ')
                                             } */}
-                                            {props.movie.popularity}
+                                            {movie.popularity}
                                         </td>
                                     </tr>
 
@@ -108,9 +109,9 @@ function InfoMovie(props) {
                                             </strong>
                                         </td>
                                         <td class="text-primary">
-                                            {/* {
-                                                movie.credits.cast.map(actor => actor.name).slice(0, 3).join(', ')
-                                            } */}
+                                            {
+                                                // movie.credits.cast.map(actor => actor.name).slice(0, 3).join(', ')
+                                            }
                                         </td>
                                     </tr>
 

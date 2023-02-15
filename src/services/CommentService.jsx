@@ -26,9 +26,19 @@ async function getMovieComments(movieId) {
         .catch(error => { console.log(error); return [] })
 }
 
+function deleteCommentById(commentId) {
+    console.log('delete')
+    return axios.post('/comments/delete/' + commentId, { "id": commentId },
+
+        {
+            headers: { 'Authorization': AuthService.getCurrentUser() }
+        }).then(response => { console.log(response); return response })
+}
+
 const CommentService = {
     createComment,
-    getMovieComments
+    getMovieComments,
+    deleteCommentById
 }
 
 export default CommentService

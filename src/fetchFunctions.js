@@ -61,11 +61,11 @@ export async function getPropositions(keyword) {
 
 export async function getMovieById(id) {
   const url = "https://api.themoviedb.org/3/movie/" + id + "?api_key=41f24e687319483950191eafd27835f1&language=fr-FR&append_to_response=credits";
-  const results = await fetch(url)
+  const movie = await fetch(url)
     .then(response => response.json())
     .catch(
       error => console.log(error)
     );
-  console.log(results)
-  return results;
+  console.log(movie)
+  return movie;
 }
