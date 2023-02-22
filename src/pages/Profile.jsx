@@ -37,7 +37,7 @@ function Profile(props) {
         setUser(props.user)
         UserService.getImage(props.user.id)
             .then(url => {
-                // console.log(url)
+                console.log(url)
                 setDataUrl(url)
             })
     }, [])
@@ -50,6 +50,19 @@ function Profile(props) {
     function handleFileChange(event) {
         console.log(event.target.files[0])
         setProfileImage(event.target.files[0])
+        const file = event.target.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function () {
+                setDataUrl(reader.result);
+                // Use the data URL as needed
+                console.log(dataUrl);
+            };
+
+            reader.readAsDataURL(file);
+        }
     }
 
     function handleSubmit() {
@@ -71,13 +84,13 @@ function Profile(props) {
                             <form>
                                 <div class="text-center">
                                     <img src={
-                                        (!dataUrl) ? require("../images/unknown.png") :
+                                        (dataUrl === 'data:image/jpeg;base64,') ? require("../images/unknown.png") :
                                             dataUrl
                                     }
                                         class="avatar img-circle img-thumbnail" alt="avatar" />
                                     <h6>Upload a different photo...</h6>
 
-                                    <input type="file" class="form-control" onChange={handleFileChange} />
+                                    <input type="file" class="form-control" accept='image/*' onChange={handleFileChange} />
 
                                     <input type="button" className="btn" value="Changer"
                                         onClick={handleSubmit} />
