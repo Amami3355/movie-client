@@ -31,21 +31,22 @@ function MovieList() {
     }
 
     function fetchInitialData(newGenre) {
+        alert('hee')
         if (newGenre === 'action') {
-            getActionMovies().then(result => { setMovies(result.results) })
+            getActionMovies(1).then(result => { console.log(result.results); setMovies(result.results) })
         }
         if (newGenre === 'trending') {
-            fetchTrendingMovies().then(result => { setMovies(result.results) })
+            fetchTrendingMovies(1).then(result => { setMovies(result.results) })
         }
         if (newGenre === 'aventure') {
-            getAdventureMovies().then(result => { setMovies(result.results) })
+            getAdventureMovies(1).then(result => { setMovies(result.results) })
         }
     }
 
     useEffect(() => {
         setPageIndex(1)
+        alert(pageIndex)
         fetchInitialData(genre)
-
     }, [genre])
 
 
@@ -88,7 +89,8 @@ function MovieList() {
                             <b>Yay! You have seen it all</b>
                         </p>
                     }
-                ><div style={style}>
+                >
+                    <div style={style}>
                         {
                             movies.map((movie, key) => <div key={key} style={{ width: 200 }} > <MovieCard movie={movie} /></div>)
                         }

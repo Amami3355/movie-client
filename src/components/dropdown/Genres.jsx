@@ -15,7 +15,7 @@ function Genres() {
 
 
         } transition>
-            <MenuItem><Link to={'/movie-list/action#top'}>Action</Link> </MenuItem>
+            <MenuItem><Link to='/movie-list/action'>Action</Link> </MenuItem>
             <MenuItem><Link to={'/movie-list/aventure'}>Aventure</Link></MenuItem>
             <MenuItem><Link to={'/movie-list/science-fiction'}>Science Fiction</Link></MenuItem>
             <MenuItem><Link to={'/movie-list/comedie'}>Comédie</Link></MenuItem>
