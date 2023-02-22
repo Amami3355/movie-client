@@ -1,11 +1,13 @@
 import { useEffect } from "react";
+import { connect } from "react-redux";
+import { logout } from "../actions";
 import Menu from "../components/menu/Menu";
 import AuthService from "../services/auth.service";
 
-function Signout() {
+function Signout(props) {
     useEffect(
         () => {
-            AuthService.logout().then(message => console.log(message));
+            AuthService.logout().then(response => { console.log(response); props.logout() });
         }
         , [])
     return (
@@ -17,4 +19,11 @@ function Signout() {
     );
 }
 
-export default Signout;
+const addDispatchToProps = (dispatch) => {
+    return {
+        logout: () => dispatch(logout())
+    }
+}
+
+
+export default connect(null, addDispatchToProps)(Signout);

@@ -5,11 +5,14 @@ import './formStyle.css';
 import AuthService from '../services/auth.service';
 import { AxiosError } from 'axios';
 import ValidationService from '../services/ValidationService';
+import { connect } from 'react-redux';
+import { login } from '../actions';
+import { propTypes } from 'react-bootstrap/esm/Image';
 
 
 
 
-const Login = () => {
+const Login = (props) => {
   const [username, setusername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -54,6 +57,7 @@ const Login = () => {
             throw new Error('user name ou mot de passe incorrects')
           } else {
             console.log(data)
+            props.login(data)
             navigate('/')
           }
         })
@@ -107,4 +111,12 @@ const Login = () => {
   );
 }
 
-export default Login;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: (user) => {
+      dispatch(login(user))
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Login);

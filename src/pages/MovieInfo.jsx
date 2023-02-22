@@ -91,7 +91,9 @@ function MovieInfo(props) {
 
     return (
         <>
+
             <Menu />
+
             <div style={InfoStyle}>
 
 

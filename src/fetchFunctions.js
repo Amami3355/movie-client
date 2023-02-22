@@ -7,7 +7,7 @@ export async function fetchTopRatedMovies() {
   return results;
 }
 
-export async function fetchTrendingMovies() {
+export async function fetchTrendingMovies(pageIndex = 1) {
   try {
     const response = await fetch("https://api.themoviedb.org/3/trending/movie/week?api_key=41f24e687319483950191eafd27835f1&page=2&language=fr-FR")
     const data = await response.json();
@@ -17,8 +17,8 @@ export async function fetchTrendingMovies() {
   }
 }
 
-export async function fetchFrenshMovies() {
-  const url = "https://api.themoviedb.org/3/movie/popular?api_key=41f24e687319483950191eafd27835f1&language=fr&with_original_language=fr&adulte=false";
+export async function fetchFrenshMovies(pageIndex = 1) {
+  const url = "https://api.themoviedb.org/3/movie/popular?api_key=41f24e687319483950191eafd27835f1&language=fr&with_original_language=fr&adulte=false&page=" + pageIndex;
   try {
     const response = await fetch(url)
     const data = await response.json();
@@ -29,8 +29,8 @@ export async function fetchFrenshMovies() {
 }
 
 
-export async function getActionMovies() {
-  const url = "https://api.themoviedb.org/3/discover/movie?api_key=41f24e687319483950191eafd27835f1&with_genres=28";
+export async function getActionMovies(pageIndex = 1) {
+  const url = "https://api.themoviedb.org/3/discover/movie?api_key=41f24e687319483950191eafd27835f1&with_genres=28&page=" + pageIndex;
   const results = await fetch(url)
     .then(response => response.json())
     .catch(
@@ -39,8 +39,8 @@ export async function getActionMovies() {
   return results;
 }
 
-export async function getAdventureMovies() {
-  const url = "https://api.themoviedb.org/3/discover/movie?api_key=41f24e687319483950191eafd27835f1&with_genres=12";
+export async function getAdventureMovies(pageIndex = 1) {
+  const url = "https://api.themoviedb.org/3/discover/movie?api_key=41f24e687319483950191eafd27835f1&with_genres=12&page=" + pageIndex;
   const results = await fetch(url)
     .then(response => response.json())
     .catch(

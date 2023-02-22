@@ -16,7 +16,7 @@ function MovieCard(props) {
   return (
     <div key={props.index}>
       {/* <button className='btn' onClick={() => handleClick(props.movie.id)}> */}
-      <Link to={'/movie-info/' + props.movie.id}>
+      <Link to={'/movie-info/' + props.movie.id + '#top'}>
         <Card height={250} >
           <Card.Img height={200} variant="top" src={baseUrl + size + props.movie.poster_path}
           />

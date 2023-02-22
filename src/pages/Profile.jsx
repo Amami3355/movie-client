@@ -1,12 +1,18 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { login } from '../actions';
 import Menu from '../components/menu/Menu';
 import AuthService from '../services/auth.service';
 import UserService from "../services/user.service";
 
-function Profile() {
+function Profile(props) {
 
     const [user, setUser] = useState({})
+    const [firstName, setFirstName] = useState(props.user.firstName)
+    const [lastName, setLastName] = useState(props.user.lastName)
+    const [profileImage, setProfileImage] = useState(null)
+    const [dataUrl, setDataUrl] = useState('')
 
     const profileStyle = {
         position: 'relative',
@@ -20,11 +26,37 @@ function Profile() {
         alert.style.display = 'none'
     }
 
+    function handleFistNameChange(e) {
+        setFirstName(e.target.value)
+    }
+    function handleLastNameChange(e) {
+        setLastName(e.target.value)
+    }
+
     useEffect(() => {
-        const jwt = AuthService.getCurrentUser();
-        UserService.getUserByjwt(jwt)
-            .then(response => setUser(response.data))
+        setUser(props.user)
+        UserService.getImage(props.user.id)
+            .then(url => {
+                // console.log(url)
+                setDataUrl(url)
+            })
     }, [])
+
+    function handleUpdate() {
+        UserService.updateUser(user.id, firstName, lastName).then(user => { console.log(user); setUser(user); props.updateUser(user) })
+        // UserService.test()
+    }
+
+    function handleFileChange(event) {
+        console.log(event.target.files[0])
+        setProfileImage(event.target.files[0])
+    }
+
+    function handleSubmit() {
+        const formData = new FormData();
+        formData.append('image', profileImage);
+        UserService.uploadImage(formData, props.user.id)
+    }
 
     return (
         <>
@@ -36,12 +68,21 @@ function Profile() {
                     <div class="row">
                         {/* left column  */}
                         <div class="col-md-3">
-                            <div class="text-center">
-                                <img src={require("../images/unknown.png")} class="avatar img-circle img-thumbnail" alt="avatar" />
-                                <h6>Upload a different photo...</h6>
+                            <form>
+                                <div class="text-center">
+                                    <img src={
+                                        (!dataUrl) ? require("../images/unknown.png") :
+                                            dataUrl
+                                    }
+                                        class="avatar img-circle img-thumbnail" alt="avatar" />
+                                    <h6>Upload a different photo...</h6>
 
-                                <input type="file" class="form-control" />
-                            </div>
+                                    <input type="file" class="form-control" onChange={handleFileChange} />
+
+                                    <input type="button" className="btn" value="Changer"
+                                        onClick={handleSubmit} />
+                                </div>
+                            </form>
                         </div>
 
                         {/* edit form column  */}
@@ -57,13 +98,13 @@ function Profile() {
                                 <div class="form-group">
                                     <label class="col-lg-3 control-label">First name:</label>
                                     <div class="col-lg-8">
-                                        <input class="form-control" type="text" name="first_name" value={user.firstName} />
+                                        <input class="form-control" type="text" name="first_name" onChange={handleFistNameChange} value={firstName} />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-lg-3 control-label">Last name:</label>
                                     <div class="col-lg-8">
-                                        <input class="form-control" type="text" name="last_name" value={user.lastName} />
+                                        <input class="form-control" type="text" name="last_name" onChange={handleLastNameChange} value={lastName} />
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -78,10 +119,11 @@ function Profile() {
                                         <input class="form-control" type="text" name="email" value={user.email} />
                                     </div>
                                 </div>
-                                <div class="col-lg-8">
-                                    <input type="submit" className="btn" value="Update" />
-                                </div>
+
                             </form>
+                            <div class="col-lg-8">
+                                <button type="button" className="btn btn-primary" onClick={handleUpdate}>Update</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -91,5 +133,16 @@ function Profile() {
 
 }
 
+const mapStateToProps = state => {
+    return { user: state.user }
+}
 
-export default Profile;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateUser: (user) => {
+            dispatch(login(user))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

@@ -19,6 +19,7 @@ function App() {
   // const [isconnected, setIsConnected] = useState(false);
   return (
     <div className="App">
+      <div id='top'></div>
       <Routes>
         <Route path='navbar' element={<NavBar />}></Route>
         <Route path='/' element={<Home />}></Route>
