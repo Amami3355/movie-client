@@ -29,10 +29,28 @@
     --dl-space-space-tripleunit: 24px;
 }
 
+
 body {
-    width: 100%;
-    display: flex;
     min-height: 100vh;
+    display: flex;
     flex-direction: column;
-    /* position: relative; */
+}
+
+footer {
+    margin-top: auto;
+}
+
+
+.button-grow {
+    color: #65b5f6;
+    background-color: transparent;
+    border: 1px solid #29353f;
+    border-radius: 4px;
+    padding: 0 16px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.button-grow:hover {
+    transform: scale(1.1);
 }

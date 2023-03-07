@@ -12,8 +12,7 @@ function Signout(props) {
         , [])
     return (
         <div>
-            <Menu />
-            <br /><br /><br /><br />
+
             <h1>See you later</h1>
         </div>
     );

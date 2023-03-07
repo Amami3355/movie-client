@@ -52,14 +52,14 @@ function updateUser(id, firstName, lastName) {
         then(response => { alert(response.data); return response.data })
 }
 
-function test() {
-    return axios.post('/users/test',
+// function test() {
+//     return axios.post('/users/test',
 
-        {
-            headers: { Authorization: jwt, "Content-Type": "multipart/form-data" }
-        })
-        .then(response => { console.log(response); return response })
-}
+//         {
+//             headers: { Authorization: jwt, "Content-Type": "multipart/form-data" }
+//         })
+//         .then(response => { console.log(response); return response })
+// }
 
 function uploadImage(file, id) {
     return axios.post('/users/upload/' + id, file,
@@ -79,6 +79,12 @@ function getImage(id) {
         .catch(error => { console.log(error) })
 }
 
+function sendEmailToChangePassword(username) {
+    debugger
+    return axios.post('users/send-password-token/' + username)
+        .catch(error => console.log(error))
+}
+
 const UserService = {
     getPublicContent,
     getUserBoard,
@@ -87,9 +93,9 @@ const UserService = {
     addMovieToWatchList,
     getWatchList,
     updateUser,
-    test,
     uploadImage,
-    getImage
+    getImage,
+    sendEmailToChangePassword
 }
 
 export default UserService

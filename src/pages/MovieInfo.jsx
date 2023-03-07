@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import Trailer from "../components/carroussel/Trailer";
 // import Comment from "../components/comment/Comment";
 import InfoMovie from "../components/InfoMovie";
+import Loader from "../components/loader/Loader";
 import Menu from "../components/menu/Menu";
 import { getMovieById } from "../fetchFunctions";
 import AuthService from "../services/auth.service";
@@ -15,6 +16,9 @@ function MovieInfo(props) {
     const [trailerPlaying, setTrailerPlaying] = useState(false);
     const [movie, setMovie] = useState({});
     const [value, setValue] = useState("");
+
+    const [loading, setLoading] = useState(false)
+
     const user = AuthService.getCurrentUser();
 
     const { movieId } = useParams();
@@ -92,7 +96,7 @@ function MovieInfo(props) {
     return (
         <>
 
-            <Menu />
+
 
             <div style={InfoStyle}>
 
@@ -196,35 +200,44 @@ function MovieInfo(props) {
                     </div>
                 </div>
                 <div className="container mt-5" >
-                    {!trailerPlaying &&
-                        <div style={{ position: 'relative', width: '100%' }}>
+                    {/* {!trailerPlaying &&
+                        <div>
+                            <figure class="hover-img" style={{ position: 'relative', width: '70%', desplay: 'block' }}
+                                onClick={PlayTrailer}>
 
-                            <img alt={movie.title}
-                                style={{ width: '100%', margin: 'auto', objectFit: 'inherit', height: '400px', display: 'block' }}
-                                src={baseUrl + size + movie.poster_path} />
+                                <img alt={movie.title}
+                                    style={{ width: '100%', objectFit: 'inherit', margin: 'auto', width: '60%', height: '400px', display: 'block' }}
+                                    src={baseUrl + size + movie.poster_path} />
 
-                            <FontAwesomeIcon className="btn" icon={faPlayCircle}
-                                style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 50, height: 50 }}
-                                onClick={PlayTrailer}
-                            />
+
+                            </figure>
                         </div>
                     }
+                    {
+                        loading &&
 
-                    {trailerPlaying &&
-                        <div style={{ position: 'relative', height: 400, width: '100%', margin: 'auto' }}>
+                        <Loader />
 
+                    } */}
+                    {/* 
+                    {trailerPlaying && */}
+                    <div style={{ position: 'relative', height: 400 }}>
+                        <div style={{ width: '70%' }} >
                             <Trailer movieId={movieId} />
-
-
                         </div>
-                    }
 
-                    <button style={{ margin: '20px 0' }} onClick={addToWatchList} type="button" className="btn btn-primary">Ajouter à la watch list</button>
+                    </div>
+                    {/* } */}
+
+                    <button style={{ margin: '20px 0' }} onClick={addToWatchList} type="button"
+                        className="button-grow btn-info">
+                        Ajouter à la watch list
+                    </button>
                 </div>
                 <div className="container">
-                    <section className="content-item" id="comments">
+                    <section className="content-item" id="comments" style={{ maxWidth: '70%' }}>
                         <div className='container'>
-                            <div className='row'>
+                            <div className='row' >
                                 <div className='col sm-8'>
                                     <form className='form'>
                                         <h3 className="float-none pl-5">New Comment</h3>
@@ -236,7 +249,8 @@ function MovieInfo(props) {
                                                 <div class="container col-md-10 form-group">
                                                     <textarea class="form-control" id="text" name="text" placeholder="Type in your message" rows="5"></textarea>
                                                     <h6 class="float-end" id="count_message"></h6>
-                                                    <button class="btn btn-info float-end" type="button"
+                                                    <br />
+                                                    <button class="button-grow float-end" type="button"
                                                         onClick={handleSubmit}>Post New Message</button>
                                                 </div>
                                             </div>

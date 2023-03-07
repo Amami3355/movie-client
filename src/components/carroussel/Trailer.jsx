@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import ReactPlayer from "react-player"
+import ReactPlayer from "react-player/lazy"
 
 function Trailer(props) {
 
@@ -21,7 +21,7 @@ function Trailer(props) {
 
         <div>
             <ReactPlayer width="100%" height={400} url={movieTrailerUrl}
-                playing controls={true}
+                controls={true}
                 config={{
                     youtube: {
                         playerVars: {

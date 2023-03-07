@@ -45,11 +45,13 @@ const getCurrentUser = () => {
     return localStorage.getItem('Authorization');
 }
 
+
 const AuthService = {
     register,
     login,
     logout,
-    getCurrentUser
+    getCurrentUser,
+
 }
 
 export default AuthService;

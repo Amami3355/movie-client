@@ -68,7 +68,7 @@ function CarouselComponent(props) {
     return (
 
         <div style={{
-            marginBottom: 40, width: '100%', marginTop: 100
+            marginBottom: 40, width: '100%'
         }}>
             {showPosters &&
                 <Carousel activeIndex={index} onSelect={changeIndex}

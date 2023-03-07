@@ -73,8 +73,6 @@ function MovieList() {
     return (
         <div style={{ minHeight: '100%', position: 'relative' }}>
 
-            <Menu />
-            <br /><br /><br /><br /><br />
             <div className="container">
 
                 {/* <div className="row justify-content-center"> */}

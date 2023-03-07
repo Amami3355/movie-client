@@ -1,6 +1,7 @@
 // import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
+import './movieCard.css'
 
 function MovieCard(props) {
   // const navigate = useNavigate();
@@ -14,17 +15,25 @@ function MovieCard(props) {
   // }
 
   return (
-    <div key={props.index}>
-      {/* <button className='btn' onClick={() => handleClick(props.movie.id)}> */}
-      <Link to={'/movie-info/' + props.movie.id + '#top'}>
-        <Card height={250} >
-          <Card.Img height={200} variant="top" src={baseUrl + size + props.movie.poster_path}
-          />
+    // <div key={props.index}>
+    //   <Link to={'/movie-info/' + props.movie.id + '#top'}>
+    //     <Card height={250} >
+    //       <Card.Img height={200} variant="top" src={baseUrl + size + props.movie.poster_path}
+    //       />
 
-        </Card>
-      </Link>
-      {/* </button> */}
-    </div>
+    //     </Card>
+    //   </Link>
+    // </div>
+    <Link to={'/movie-info/' + props.movie.id + '#top'}>
+      <figure class="hover-img">
+
+        <img src={baseUrl + size + props.movie.poster_path} style={{ height: 200 }} />
+        {/* <figcaption>
+          <p>{props.movie.title}</p>
+        </figcaption> */}
+
+      </figure>
+    </Link>
   );
 }
 

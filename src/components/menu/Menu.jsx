@@ -6,9 +6,12 @@ import './menu.css'
 import AuthService from '../../services/auth.service'
 import SearchBar from '../searchBar/SearchBar';
 import { Menu as Menu2, MenuItem } from '@szhsin/react-menu';
+import { connect } from 'react-redux';
+import { login } from '../../actions';
 
-function Menu() {
+function Menu(props) {
     const [isConnected, setIsConnected] = useState(false)
+    const [user, setUser] = useState(null);
 
     function showMobileMenu() {
         // document.getElementById('BurgerMenu').style.display = 'none'
@@ -23,19 +26,22 @@ function Menu() {
 
     useEffect(
         () => {
-            const user = AuthService.getCurrentUser();
-            if (user) {
+            // setUser(props.user);
+            if (props.user) {
                 setIsConnected(true)
             } else {
                 setIsConnected(false)
             }
-        }, [isConnected]
+        }, [props.user]
     )
 
     return (
         <div data-role="Header" className="home-navbar-container">
             <div className="home-navbar">
-                <span className="Card-Heading home-heading">Logo</span>
+                {/* <span className="Card-Heading home-heading">Logo</span> */}
+                <Link to={'/'}>
+                    <img src={require('../../images/cine-vibe-logo.png')} style={{ height: 50, width: 100 }} />
+                </Link>
                 <SearchBar />
                 {!isConnected && (
                     <div className="home-links-container">
@@ -109,4 +115,17 @@ function Menu() {
     )
 }
 
-export default Menu;
+
+const mapStateToProps = state => {
+    return { user: state.user }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateUser: (user) => {
+            dispatch(login(user))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Menu);

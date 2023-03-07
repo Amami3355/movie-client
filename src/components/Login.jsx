@@ -8,7 +8,7 @@ import ValidationService from '../services/ValidationService';
 import { connect } from 'react-redux';
 import { login } from '../actions';
 import { propTypes } from 'react-bootstrap/esm/Image';
-
+import Modal from "../components/modal/Modal";
 
 
 
@@ -16,7 +16,7 @@ const Login = (props) => {
   const [username, setusername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-
+  const [isModal, setModal] = useState(false);
 
 
 
@@ -58,7 +58,8 @@ const Login = (props) => {
           } else {
             console.log(data)
             props.login(data)
-            navigate('/')
+            // navigate('/')
+            setModal(true)
           }
         })
         .then(() => { console.log(AuthService.getCurrentUser()) })
@@ -105,7 +106,10 @@ const Login = (props) => {
       </form>
 
 
-
+      <Modal
+        isVisible={isModal}
+        onClose={() => navigate('/')}
+      />
 
     </>
   );

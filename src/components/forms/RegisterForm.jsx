@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../services/auth.service";
 import Modal from "./modal/Modal";
-function Register() {
+function RegisterForm() {
 
 
     const [username, setusername] = useState('');
@@ -88,4 +88,4 @@ function Register() {
     );
 }
 
-export default Register;
+export default RegisterForm;

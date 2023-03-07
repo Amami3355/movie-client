@@ -12,8 +12,7 @@ function Home() {
     return (
         <div style={{ minHeight: '100%', position: 'relative' }}>
 
-            <Menu />
-            <br />
+
             <CarouselComponent />
             <h2 style={{ position: 'relative', left: 75 }}>Tendences</h2>
             <MoviesCarousel content="trending" />
