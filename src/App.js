@@ -22,7 +22,7 @@ function App() {
   return (
     <>
       <Menu />
-      <div style={{ paddingTop: 150 }}>
+      <div style={{ paddingTop: 120 }}>
         <Routes>
           <Route path='navbar' element={<NavBar />}></Route>
           <Route path='/' element={<Home />}></Route>

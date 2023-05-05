@@ -1,12 +1,8 @@
-import { faPlayCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Trailer from "../components/carroussel/Trailer";
-// import Comment from "../components/comment/Comment";
-import InfoMovie from "../components/InfoMovie";
-import Loader from "../components/loader/Loader";
-import Menu from "../components/menu/Menu";
+
 import { getMovieById } from "../fetchFunctions";
 import AuthService from "../services/auth.service";
 import CommentService from "../services/CommentService";
@@ -17,7 +13,7 @@ function MovieInfo(props) {
     const [movie, setMovie] = useState({});
     const [value, setValue] = useState("");
 
-    const [loading, setLoading] = useState(false)
+    // const [loading, setLoading] = useState(false)
 
     const user = AuthService.getCurrentUser();
 
@@ -68,7 +64,7 @@ function MovieInfo(props) {
 
     useEffect(() => {
         UserService.getUserByjwt(user).then(response => setUser(response.data))
-    }, [])
+    })
 
 
     function PlayTrailer() {
@@ -78,7 +74,7 @@ function MovieInfo(props) {
     const InfoStyle = {
         position: 'relative',
         margin: 'auto',
-        top: 100,
+        // top: 100,
         display: 'block'
     }
 

@@ -20,7 +20,7 @@ function Profile(props) {
     const profileStyle = {
         position: 'relative',
         margin: 'auto',
-        top: 100,
+        // top: 100,
         display: 'block'
     }
 
