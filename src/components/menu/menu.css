@@ -74,7 +74,7 @@
 
 .home-links-container {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     flex-direction: row;
 }
 

@@ -28,7 +28,7 @@ const addMovieToWatchList = (movieId, jwt) => {
     return axios.post('/users/add-to-watchlist',
         { "movieId": movieId },
         {
-            headers: { Authorization: jwt, "Content-Type": "multipart/form-data" }
+            headers: { Authorization: AuthService.getCurrentUser(), "Content-Type": "multipart/form-data" }
         })
         .then(response => { console.log(response); return response })
 }

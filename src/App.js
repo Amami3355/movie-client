@@ -12,33 +12,83 @@ import Signout from './pages/Signout';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
 import WatchList from './pages/WatchList';
-import './components/comment/comment.css'
+import './components/comment/comment.css';
 import MovieList from './pages/MovieList';
 import Menu from './components/menu/Menu';
-import UpdatePassword from './pages/UpdatePassword'
+import UpdatePassword from './pages/UpdatePassword';
+import Footer from './components/footer/Footer';
 
 function App() {
   // const [isconnected, setIsConnected] = useState(false);
   return (
     <>
       <Menu />
-      <div style={{ paddingTop: 120 }}>
+
+      <div
+        style={{
+          paddingTop: '10vh',
+          display: 'flex',
+          width: '100%',
+          flexDirection: 'column',
+          minHeight: '90vh'
+        }}
+      >
         <Routes>
-          <Route path='navbar' element={<NavBar />}></Route>
-          <Route path='/' element={<Home />}></Route>
-          <Route path='/signin' element={<Signin />}></Route>
-          <Route path='/signout' element={<Signout />}></Route>
-          <Route path='/signup' element={<Signup />}></Route>
-          <Route path='/profile' element={<Profile />}></Route>
-          <Route path='/about' element={<About />}></Route>
-          <Route path='/contact' element={<Contact />}></Route>
-          <Route path='/error' element={<Error />}></Route>
-          <Route path='/movie-info/:movieId' element={<MovieInfo />}></Route>
-          <Route path='/movie-list/:genre' element={<MovieList />}></Route>
-          <Route path='/watch-list' element={<WatchList />}></Route>
-          <Route path='/update-password/:usernameToken' element={<UpdatePassword />}></Route>
+          {/* <Route
+              path='navbar'
+              element={<NavBar />}
+            ></Route> */}
+          <Route
+            path='/'
+            element={<Home />}
+          ></Route>
+          <Route
+            path='/signin'
+            element={<Signin />}
+          ></Route>
+          <Route
+            path='/signout'
+            element={<Signout />}
+          ></Route>
+          <Route
+            path='/signup'
+            element={<Signup />}
+          ></Route>
+          <Route
+            path='/profile'
+            element={<Profile />}
+          ></Route>
+          <Route
+            path='/about'
+            element={<About />}
+          ></Route>
+          <Route
+            path='/contact'
+            element={<Contact />}
+          ></Route>
+          <Route
+            path='/error'
+            element={<Error />}
+          ></Route>
+          <Route
+            path='/movie-info/:movieId'
+            element={<MovieInfo />}
+          ></Route>
+          <Route
+            path='/movie-list/:genre'
+            element={<MovieList />}
+          ></Route>
+          <Route
+            path='/watch-list'
+            element={<WatchList />}
+          ></Route>
+          <Route
+            path='/update-password/:usernameToken'
+            element={<UpdatePassword />}
+          ></Route>
         </Routes>
       </div>
+      <Footer />
     </>
   );
 }

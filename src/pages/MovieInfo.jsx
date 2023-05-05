@@ -1,21 +1,23 @@
 
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Trailer from "../components/carroussel/Trailer";
 
 import { getMovieById } from "../fetchFunctions";
-import AuthService from "../services/auth.service";
 import CommentService from "../services/CommentService";
 import UserService from "../services/user.service";
 function MovieInfo(props) {
 
-    const [trailerPlaying, setTrailerPlaying] = useState(false);
     const [movie, setMovie] = useState({});
     const [value, setValue] = useState("");
+    const [comments, setComments] = useState([])
+    // const [dataUrl, setDataUrl] = useState('')
+    // const [Authuser, setUser] = useState({})
+    const user = useSelector(state => state.user)
 
     // const [loading, setLoading] = useState(false)
-
-    const user = AuthService.getCurrentUser();
+    // const user = AuthService.getCurrentUser();
 
     const { movieId } = useParams();
 
@@ -26,15 +28,14 @@ function MovieInfo(props) {
         UserService.addMovieToWatchList(movie.id, user);
     }
 
-    const [comments, setComments] = useState([])
-    const [Authuser, setUser] = useState({})
+
 
     async function handleSubmit(e) {
         if (user) {
             const text = document.getElementById('text').value
 
             CommentService.createComment(movieId, text)
-                .then((response) => { setValue(text) });
+                .then(() => { setValue(text) });
 
             document.getElementById('text').value = "";
         } else {
@@ -54,22 +55,11 @@ function MovieInfo(props) {
 
     useEffect(() => {
         CommentService.getMovieComments(movieId)
-            .then(res => { setComments(res) })
+            .then(res => { console.log('comments'); setComments(res) })
             .catch(error => setComments([]))
-
-
         getMovieById(movieId).then(movie => setMovie(movie))
-
     }, [movieId, value])
 
-    useEffect(() => {
-        UserService.getUserByjwt(user).then(response => setUser(response.data))
-    })
-
-
-    function PlayTrailer() {
-        setTrailerPlaying(true);
-    }
 
     const InfoStyle = {
         position: 'relative',
@@ -91,9 +81,6 @@ function MovieInfo(props) {
 
     return (
         <>
-
-
-
             <div style={InfoStyle}>
 
 
@@ -196,34 +183,14 @@ function MovieInfo(props) {
                     </div>
                 </div>
                 <div className="container mt-5" >
-                    {/* {!trailerPlaying &&
-                        <div>
-                            <figure class="hover-img" style={{ position: 'relative', width: '70%', desplay: 'block' }}
-                                onClick={PlayTrailer}>
 
-                                <img alt={movie.title}
-                                    style={{ width: '100%', objectFit: 'inherit', margin: 'auto', width: '60%', height: '400px', display: 'block' }}
-                                    src={baseUrl + size + movie.poster_path} />
-
-
-                            </figure>
-                        </div>
-                    }
-                    {
-                        loading &&
-
-                        <Loader />
-
-                    } */}
-                    {/* 
-                    {trailerPlaying && */}
                     <div style={{ position: 'relative', height: 400 }}>
                         <div style={{ width: '70%' }} >
                             <Trailer movieId={movieId} />
                         </div>
 
                     </div>
-                    {/* } */}
+
 
                     <button style={{ margin: '20px 0' }} onClick={addToWatchList} type="button"
                         className="button-grow btn-info">
@@ -235,48 +202,60 @@ function MovieInfo(props) {
                         <div className='container'>
                             <div className='row' >
                                 <div className='col sm-8'>
-                                    <form className='form'>
-                                        <h3 className="float-none pl-5">New Comment</h3>
-                                        <div className='container-fluid'>
-                                            <div className='row'>
-                                                <div className="col-md-2 hidden-xs">
-                                                    <img style={{ maxWidth: 100 }} className="media-object" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" />
-                                                </div>
-                                                <div class="container col-md-10 form-group">
-                                                    <textarea class="form-control" id="text" name="text" placeholder="Type in your message" rows="5"></textarea>
-                                                    <h6 class="float-end" id="count_message"></h6>
-                                                    <br />
-                                                    <button class="button-grow float-end" type="button"
-                                                        onClick={handleSubmit}>Post New Message</button>
+                                    {user &&
+                                        <form className='form'>
+                                            <h3 className="float-none pl-5">New Comment</h3>
+                                            <div className='container-fluid'>
+                                                <div className='row'>
+                                                    <div className="col-md-2 hidden-xs">
+                                                        {/* <img style={{ maxWidth: 100 }} className="media-object" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" /> */}
+                                                        <img src={
+                                                            (user.imageData === 'data:image/jpeg;base64,') ? require("../images/unknown.png") :
+                                                                user.imageData
+                                                        } style={{ maxWidth: 100 }}
+                                                            alt="avatar" />
+                                                    </div>
+                                                    <div class="container col-md-10 form-group">
+                                                        <textarea class="form-control" id="text" name="text" placeholder="Type in your message" rows="5"></textarea>
+                                                        <h6 class="float-end" id="count_message"></h6>
+                                                        <br />
+                                                        <button class="button-grow float-end" type="button"
+                                                            onClick={handleSubmit}>Post New Message</button>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </form>
-
+                                        </form>
+                                    }
                                     <h3> Comments</h3>
                                     {
                                         comments.map((comment, index) => (
                                             <div key={index} className="d-flex media">
-                                                <a className="float-none" href="#"><img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" /></a>
+                                                <a className="float-none" href="#">
+                                                    <img src={
+                                                        (comment.imageData === 'data:image/jpeg;base64,') ? require("../images/unknown.png") :
+                                                            comment.imageData
+                                                    } alt="avatar" />
+                                                </a>
                                                 <div className="flex-grow-1 ms-3">
-                                                    <h4 className="media-heading">{comment.user.username}</h4>
+                                                    <h4 className="media-heading">{comment.owner}</h4>
                                                     <p>{comment.text}</p>
                                                     <ul className="d-inline list-unstyled list-inline media-detail float-none">
-                                                        <li className='list-inline-item'>27/02/2014</li>
-                                                        <li className='list-inline-item'>13</li>
+                                                        <li className='list-inline-item'>{(new Date(comment.date)).toLocaleDateString("en-GB")}</li>
+
                                                     </ul>
                                                     {
-                                                        (Authuser.username === comment.user.username) && (
+                                                        user && (user.username === comment.owner) && (
                                                             <form className="d-inline list-unstyled list-inline media-detail float-end">
                                                                 <li type="submit" className='list-inline-item'><div onClick={function () { deleteComment(comment.id); return false; }} className="btn text-danger mt-0 mb-0 pt-0 pb-0" href="">delete</div></li>
+                                                                {/* <li className='list-inline-item'><button href="#">Reply</button></li> */}
                                                             </form>
                                                         )}
-                                                    {(Authuser.username !== comment.user.username) && (
+                                                    {/* {(user.username !== comment.user.username) && (
                                                         <ul className="d-inline list-unstyled list-inline media-detail float-end">
                                                             <li className='list-inline-item'><a href="">Like</a></li>
                                                             <li className='list-inline-item'><a href="">Reply</a></li>
                                                         </ul>)
-                                                    }
+                                                    } */}
                                                 </div>
                                             </div>
                                         ))

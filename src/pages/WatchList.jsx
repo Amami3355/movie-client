@@ -40,7 +40,13 @@ function MovieList() {
             <div className="container">
                 <div className="row justify-content-center">
                     {
-                        movies.map(movie => <div className="col-3-md" style={{ width: 200 }} > <MovieCard movie={movie} /></div>)
+                        movies.map(movie => <div className="col-3-md" style={{ width: 200 }} >
+                            <div>
+                                <MovieCard movie={movie} />
+                                <div style={{ textAlign: 'center' }}><button className="btn">delete</button></div>
+                                <hr />
+                            </div>
+                        </div>)
                     }
                 </div>
             </div>

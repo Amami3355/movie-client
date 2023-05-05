@@ -7,7 +7,10 @@ async function createComment(movieId, text) {
         "text": text
     },
         {
-            headers: { 'Authorization': AuthService.getCurrentUser() }
+            headers: {
+                'Authorization': AuthService.getCurrentUser(),
+                // 'X-CSRF-TOKEN': 'wwkwkwk'
+            }
         }
 
     )

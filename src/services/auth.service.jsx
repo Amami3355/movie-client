@@ -45,13 +45,19 @@ const getCurrentUser = () => {
     return localStorage.getItem('Authorization');
 }
 
+const getCsrfToken = () => {
+    return axios.get(API_URL + '/csrf')
+        .then(response => response.data)
+        .catch(err => console.log(err))
+}
+
 
 const AuthService = {
     register,
     login,
     logout,
     getCurrentUser,
-
+    getCsrfToken
 }
 
 export default AuthService;
